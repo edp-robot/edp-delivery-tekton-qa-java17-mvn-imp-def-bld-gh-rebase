@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "java17-mvn-imp-def-bld-gh-rebase.fullname" . }}
+  labels:
+    {{- include "java17-mvn-imp-def-bld-gh-rebase.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "java17-mvn-imp-def-bld-gh-rebase.selectorLabels" . | nindent 4 }}
